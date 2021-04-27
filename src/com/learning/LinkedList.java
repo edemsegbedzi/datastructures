@@ -12,6 +12,21 @@ public class LinkedList<E>  implements ListI {
         currentSize++;
     }
 
+    public void addLast(E data){
+        if(head == null){
+            head = new Node(data);
+            currentSize++;
+            return;
+        }
+        Node temp = head;
+        while(temp.next != null){
+            temp = temp.next;
+        }
+        temp.next = new Node(data);
+        currentSize++;
+    }
+
+
     class Node<E>{
         Node<E> next;
         E data;
