@@ -1,5 +1,6 @@
 package com.learning;
 
+
 public class LinkedList<E>  implements ListI {
 
     Node head;
@@ -43,6 +44,25 @@ public class LinkedList<E>  implements ListI {
         tail.next = node;
         tail = node;
         currentSize ++;
+    }
+
+    public Object removeLast(){
+        if(currentSize == 0){
+            return null;
+        }else if (currentSize ==1){
+            Object data = head.data;
+            head = tail = null;
+            return data;
+        }else {
+            Node temp = head;
+            while (temp.next != tail){
+                temp = temp.next;
+            }
+            Object data = tail.data;
+            tail = temp;
+            tail.next = null;
+            return data;
+        }
     }
 
 
