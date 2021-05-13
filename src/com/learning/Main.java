@@ -6,13 +6,20 @@ public class Main {
 	// write your code here
 
         LinkedList linkedList = new LinkedList();
-        linkedList.addLast("E");
         linkedList.addFirst("D");
         linkedList.addFirst("C");
         linkedList.addFirst("B");
         linkedList.addFirst("A");
         linkedList.addLast("E");
         linkedList.addLast("F");
+//        linkedList.removeLast();
+//        linkedList.addLast("F");
+//        linkedList.removeLast();
+//        linkedList.addLast("F");
+//        linkedList.removeFirst();
+        linkedList.remove("F");
+
+
 
 
         linkedList.printAll();

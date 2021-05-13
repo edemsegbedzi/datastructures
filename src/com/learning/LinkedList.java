@@ -46,24 +46,95 @@ public class LinkedList<E>  implements ListI {
         currentSize ++;
     }
 
-    public Object removeLast(){
+    public E removeLast(){
         if(currentSize == 0){
             return null;
         }else if (currentSize ==1){
             Object data = head.data;
             head = tail = null;
-            return data;
+            return (E) data;
         }else {
             Node temp = head;
             while (temp.next != tail){
                 temp = temp.next;
             }
-            Object data = tail.data;
+            E data = (E) tail.data;
             tail = temp;
             tail.next = null;
             return data;
         }
     }
+
+    public E removeFirst(){
+        if(currentSize == 0){
+            return null;
+        }else if(currentSize == 1){
+            E data = (E) head.data;
+            tail = head = null;
+            currentSize --;
+            return data;
+        }else {
+            E data = (E) head.data;
+            head = head.next;
+            currentSize --;
+            return data;
+        }
+    }
+
+    public boolean contains(E data){
+        if(head== null) return false;
+
+        Node temp = head;
+
+        while (temp != null){
+            if(((Comparable<E>) data).compareTo((E) temp.data) == 0){
+                return true;
+            }
+            temp = temp.next;
+        }
+        return  false;
+    }
+
+    public E remove (E data){
+
+        Node current = head;
+        Node previous = null;
+
+        while( current != null){
+
+            if(((Comparable<E> ) data).compareTo( (E) current.data) == 0){
+
+                if(currentSize == 1){
+                    return  removeFirst();
+                }else if(current.next == null){
+                    return removeLast();
+                }
+                currentSize --;
+                previous.next = current.next;
+                return (E) current.data;
+            }else {
+                previous = current;
+                current = current.next;
+            }
+
+        }
+        return null;
+    }
+
+    public E find (E data){
+        Node current = head;
+
+        while (current != null){
+            if(((Comparable<E>)data).compareTo((E) data) == 0){
+                return (E) current.data;
+            }
+            current = current.next;
+        }
+        return null;
+    }
+
+
+
 
 
     class Node<E>{
