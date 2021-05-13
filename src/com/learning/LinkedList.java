@@ -133,6 +133,19 @@ public class LinkedList<E>  implements ListI {
         return null;
     }
 
+    public E peekFirst(){
+        if(head == null) return null;
+
+        return (E) head.data;
+    }
+
+    public E peekLast(){
+        if(tail == null) return  null;
+
+        return (E) tail.data;
+    }
+
+
 
 
 
