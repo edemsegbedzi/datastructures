@@ -1,7 +1,10 @@
 package com.learning;
 
 
-public class LinkedList<E>  implements ListI {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedList<E>  implements ListI,Iterable {
 
     Node head;
     Node tail;
@@ -145,9 +148,10 @@ public class LinkedList<E>  implements ListI {
         return (E) tail.data;
     }
 
-
-
-
+    @Override
+    public Iterator iterator() {
+        return new IteratorHelper();
+    }
 
 
     class Node<E>{
@@ -181,6 +185,31 @@ public class LinkedList<E>  implements ListI {
                     "next=" + next +
                     ", data=" + data +
                     '}';
+        }
+    }
+
+    class IteratorHelper<E> implements Iterator<E>{
+
+        Node index;
+
+        IteratorHelper(){
+            index = head;
+        }
+
+
+        @Override
+        public boolean hasNext() {
+            return index != null;
+        }
+
+        @Override
+        public E next() {
+            if(hasNext()){
+                E data = (E) index.data;
+                index = index.next;
+                return data;
+            }
+            throw new NoSuchElementException();
         }
     }
 

@@ -19,9 +19,13 @@ public class Main {
 //        linkedList.removeFirst();
         linkedList.remove("F");
 
+        for(Object item : linkedList){
+            System.out.println(item);
+        }
 
 
 
-        linkedList.printAll();
+
+       // linkedList.printAll();
     }
 }
