@@ -7,7 +7,7 @@ public class Main {
     public static void main(String[] args) {
 	// write your code here
 
-//        LinkedList linkedList = new LinkedList();
+//        LinkedList<String> linkedList = new LinkedList<String>();
 //        linkedList.addFirst("D");
 //        linkedList.addFirst("C");
 //        linkedList.addFirst("B");
@@ -20,8 +20,8 @@ public class Main {
 //        linkedList.addLast("F");
 //        linkedList.removeFirst();
 //        linkedList.remove("F");
-//
-//        for(Object item : linkedList){
+////
+//        for(String item : linkedList){
 //            System.out.println(item);
 //        }
 
@@ -31,6 +31,7 @@ public class Main {
         hashy.add("b", "Baked beans");
         hashy.add("a", "Acrobat");
         hashy.add("a", "Awwww");
+        System.out.println(hashy.getValue("b"));
 
 
 

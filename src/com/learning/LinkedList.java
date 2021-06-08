@@ -4,10 +4,10 @@ package com.learning;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class LinkedList<E>  implements ListI,Iterable {
+public class LinkedList<E>  implements Iterable<E> {
 
-    Node head;
-    Node tail;
+    Node<E> head;
+    Node<E> tail;
     int currentSize = 0;
 
     public void addFirst(E data){
@@ -150,7 +150,7 @@ public class LinkedList<E>  implements ListI,Iterable {
 
     @Override
     public Iterator iterator() {
-        return new IteratorHelper();
+        return new IteratorHelper<E>(this);
     }
 
 
@@ -190,11 +190,13 @@ public class LinkedList<E>  implements ListI,Iterable {
 
     class IteratorHelper<E> implements Iterator<E>{
 
-        Node index;
+        Node<E> index;
 
-        IteratorHelper(){
-            index = head;
+
+        IteratorHelper(LinkedList<E> eLinkedList){
+            index =(Node<E>) eLinkedList.head;
         }
+
 
 
         @Override
@@ -205,7 +207,7 @@ public class LinkedList<E>  implements ListI,Iterable {
         @Override
         public E next() {
             if(hasNext()){
-                E data = (E) index.data;
+                E data = index.data;
                 index = index.next;
                 return data;
             }

@@ -44,6 +44,20 @@ public class Hash<K,V> {
         return harray[hash].remove(new HashElement<>(key,null));
     }
 
+    public V getValue(K key){
+        if(elementCount == 0) return null;
+        int hashValue = computeHash(key.hashCode());
+
+        for( HashElement<K,V> he : harray[hashValue]){
+
+            if(((Comparable<K>)he.getKey()).compareTo(key) == 0){
+                return  he.getValue();
+            }
+        }
+        return null;
+    }
+
+
 
     public class HashElement<K,V> implements Comparable<HashElement<K,V>>{
         K key;
