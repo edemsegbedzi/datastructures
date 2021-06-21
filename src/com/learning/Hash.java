@@ -5,6 +5,7 @@ public class Hash<K,V> {
     int elementCount;
     int tableSize;
     LinkedList<HashElement<K,V>>[] harray;
+    LinkedList<K> keys;
 
     public Hash(int tableSize){
 
@@ -16,31 +17,52 @@ public class Hash<K,V> {
             maxLoadFactor = 0.75;
         }
         this.tableSize = tableSize;
+        keys = new LinkedList<>();
     }
 
 
     private double getLoadFactor(){
         if(tableSize == 0 || elementCount == 0) return 0;
-        return Double.valueOf(tableSize)/ elementCount;
+        return Double.valueOf(elementCount)/ tableSize;
     }
 
     private int computeHash(int hashValue){
         return Math.abs(hashValue) % this.tableSize;
     }
+    private int computeHash(int hashValue, int tableSize){
+        return Math.abs(hashValue) % tableSize;
+    }
     public void add(K key, V value){
         if(getLoadFactor() > maxLoadFactor){
             //resize Hash
+            resize(this.tableSize * 2);
         }
         int hash = computeHash(key.hashCode());
         HashElement hashElement = new HashElement(key,value);
         harray[hash].addFirst(hashElement);
+        keys.addFirst(key);
         elementCount++;
+    }
+
+    private void resize(int tableSize){
+        LinkedList<HashElement<K,V>>[] new_harray =(LinkedList<HashElement<K,V>>[]) new LinkedList[tableSize];
+        for (int i = 0; i < tableSize; i ++){
+            new_harray[i] =(LinkedList<HashElement<K,V>>) new LinkedList();
+        }
+       for (K key : keys){
+            V value = getValue(key);
+            int hash = computeHash(key.hashCode(),tableSize);
+            new_harray[hash].addFirst(new HashElement<>(key,value));
+       }
+       this.tableSize = tableSize;
+       this.harray = new_harray;
     }
 
     public HashElement<K,V> remove(K key){
         if(elementCount == 0) return  null;
         int hash = computeHash(key.hashCode());
         elementCount--;
+        keys.remove(key);
         return harray[hash].remove(new HashElement<>(key,null));
     }
 
