@@ -44,4 +44,21 @@ public class Tree<E> {
             }
         }
     }
+
+    public boolean contains( E obj){
+        return contains(obj,root);
+    }
+
+
+    private boolean contains(E obj, Node<E> node){
+        if(node == null){
+            return false;
+        }else if (((Comparable<E>) obj).compareTo(node.data) == 0){
+            return true;
+        }else if (((Comparable<E>) obj).compareTo(node.data) > 0){
+            return contains(obj,node.right);
+        }else {
+            return contains(obj, node.left);
+        }
+    }
 }
